@@ -1,0 +1,37 @@
+# DA 2009 - Assignment 2 | CSE Web Data Collection
+# Install with:  pip install -r requirements.txt
+
+#--- Collecting the data -------------------------------------------------#
+requests>=2.32           # sending requests to the website
+beautifulsoup4>=4.13     # reading HTML
+lxml>=5.0                # helps BeautifulSoup read XML files
+pandas>=2.2              # DataFrames, cleaning and saving
+numpy>=2.1               # needed by pandas
+
+#--- Browser and crawling ------------------------------------------------#
+selenium>=4.35           # opens a real browser for JavaScript pages
+scrapy>=2.12             # crawling framework
+
+#--- Reading PDFs --------------------------------------------------------#
+PyPDF2>=3.0              # simple text extraction and file details
+pdfplumber>=0.11         # keeps the layout, and finds tables
+
+#--- OCR -----------------------------------------------------------------#
+pillow>=11.0             # opening and handling images
+opencv-python>=4.10      # preparing images so OCR reads them better
+pytesseract>=0.3.13      # reads the text out of an image
+#
+# NOTE: pytesseract is only the Python part. The Tesseract program has to
+# be installed separately on Windows:
+#     https://github.com/UB-Mannheim/tesseract/wiki
+# Install it to C:\Program Files\Tesseract-OCR\ and tick the option to add
+# it to the system PATH.
+
+#--- The screen and the charts -------------------------------------------#
+gradio>=6.0
+plotly>=6.0
+
+#--- Saving files --------------------------------------------------------#
+openpyxl>=3.1            # writing Excel files
+python-pptx>=1.0         # only used to build the presentation slides
+reportlab>=4.0           # only used to build the study guide PDFs

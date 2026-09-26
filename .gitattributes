@@ -1,0 +1,17 @@
+# Windows .bat files must keep Windows line endings (CRLF). With Unix
+# line endings cmd.exe can jump to the wrong line or skip labels.
+# "-text" tells git never to change them, so the ZIP download from
+# GitHub gives exactly the bytes that were committed.
+*.bat -text
+
+# Notepad on older Windows 10 shows Unix line endings as one long line.
+*.txt text eol=crlf
+
+# These are not text. Without this, git can mistake a PDF for text and
+# change its line endings, which breaks the file.
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.pptx binary
+*.xlsx binary
+*.db   binary

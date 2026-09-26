@@ -1,0 +1,33 @@
+# Virtual environment - each person creates their own with
+#   python -m venv .venv && pip install -r requirements.txt
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Scrapy's local response cache (it creates a .scrapy/ folder next to
+# scrapy.cfg, not the bare httpcache/ path the setting implies)
+scrapy_project/.scrapy/
+
+# Collected data.
+#
+# We deliberately do NOT commit scraped data. Two reasons:
+#   1. It is CSE's data, not ours - the code that collects it is our work.
+#   2. It goes stale within a day, and a stale CSV in a repository is
+#      worse than no CSV at all.
+#
+# Run  python warm_cache.py  (or 3_Collect_Fresh_Data.bat) to rebuild it
+# in about 70 seconds. config.py makes the data folders when it starts.
+data/
+
+# The audit log is kept OUT of version control because it contains our
+# own run history rather than anything reproducible. It is regenerated
+# automatically on the first request.
+logs/
+
+# OS
+Thumbs.db
+desktop.ini
