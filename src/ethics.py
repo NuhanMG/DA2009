@@ -203,6 +203,16 @@ class Scraper:
         if not allowed:
             self.log.add(f"SKIPPED {url} - {reason}")
             self.log.log_request(method, url, "skipped", allowed)
+
+            # With no internet, robots.txt cannot be read, so nothing is
+            # sent. Showing a copy we saved earlier sends nothing to the
+            # website either, so it is still within the rules.
+            saved = self.load_copy(save_as) if save_as else None
+            if saved is not None:
+                self.log.add(f"Using the saved copy of {save_as} instead")
+                return {"ok": True, "data": saved, "from_file": True,
+                        "error": None}
+
             return {"ok": False, "data": None, "from_file": False,
                     "error": f"robots.txt says we should not request this "
                              f"address ({reason})"}

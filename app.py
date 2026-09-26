@@ -216,10 +216,16 @@ def show_ethics():
     rules = pd.DataFrame([{"Rule": name, "What we do": detail}
                           for name, detail in ETHICAL_RULES])
 
+    # With no internet the file cannot be read, and then we send nothing.
+    if scraper.robots is None:
+        blocked_text = ("could not read robots.txt (no internet?) - so we "
+                        "send nothing and show saved copies")
+    else:
+        blocked_text = ", ".join(blocked) if blocked else "none"
+
     facts = (
         f"Website          : {config.BASE_URL}\n"
-        f"Blocked sections : "
-        f"{', '.join(blocked) if blocked else 'none'}\n"
+        f"Blocked sections : {blocked_text}\n"
         f"Delay we use     : {config.DELAY} seconds between requests\n"
         f"Our User-Agent   : {config.USER_AGENT}"
     )
