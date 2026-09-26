@@ -9,7 +9,7 @@ rem  25ada141 - Salaama  |  24ada076 - Nuhan
 rem
 rem  What it does, step by step:
 rem    1. Checks the project was unzipped properly.
-rem    2. Finds Python 3.10 or newer. If there is none, it offers to
+rem    2. Finds Python 3.11 or newer. If there is none, it offers to
 rem       install Python 3.12 with winget (the installer built into
 rem       Windows 10 and 11).
 rem    3. Makes a private Python folder for this project (.venv) and
@@ -23,6 +23,10 @@ setlocal
 title Step 1 - Setting up the CSE project
 cd /d "%~dp0"
 color 07
+
+rem  PACKAGES_OK imports every package, and checks pandas is version 3 or
+rem  newer - src\cleaner.py uses pandas 3's "str" text type.
+set "PACKAGES_OK=import gradio, pandas, requests, bs4, scrapy, selenium, pdfplumber, PyPDF2, cv2, pytesseract, plotly, openpyxl, sys; sys.exit(0 if int(pandas.__version__.split('.')[0]) >= 3 else 1)"
 
 echo ============================================================
 echo   STEP 1 - SETTING UP   (only needed once on each computer)
@@ -59,27 +63,28 @@ rem ---- 2. Is the project's Python environment already working? ---------
 :check_venv
 if not exist ".venv\Scripts\python.exe" goto need_python
 rem  A .venv copied from another computer points at a Python that is
-rem  not on this one, so its python.exe will not even start.
-".venv\Scripts\python.exe" -c "import sys" >nul 2>&1
+rem  not on this one, so its python.exe will not even start. One made
+rem  with Python 3.10 or older cannot install pandas 3.
+".venv\Scripts\python.exe" -c "import sys; sys.exit(0 if sys.version_info >= (3, 11) else 1)" >nul 2>&1
 if errorlevel 1 goto venv_broken
-".venv\Scripts\python.exe" -c "import gradio, pandas, requests, bs4, scrapy, selenium, pdfplumber, PyPDF2, cv2, pytesseract, plotly, openpyxl" >nul 2>&1
+".venv\Scripts\python.exe" -c "%PACKAGES_OK%" >nul 2>&1
 if errorlevel 1 goto install_packages
 echo [OK] The project's Python environment is already set up.
 echo.
 goto tesseract
 
 :venv_broken
-echo The Python environment in the .venv folder is not working on this
-echo computer (it may have been copied from another computer).
-echo It will be built again.
+echo The Python environment in the .venv folder does not work on this
+echo computer (it may have been copied from another computer, or made
+echo with an older Python). It will be built again.
 echo.
 
-rem ---- 3. Find Python 3.10 or newer --------------------------------------
+rem ---- 3. Find Python 3.11 or newer --------------------------------------
 :need_python
 call :find_python
 if defined PY goto have_python
 
-echo Python is not installed on this computer.
+echo Python 3.11 or newer is not installed on this computer.
 echo Python is the free program this project is written in.
 echo.
 where winget >nul 2>&1
@@ -131,7 +136,7 @@ echo.
 if errorlevel 1 goto pip_failed
 
 :check_packages
-".venv\Scripts\python.exe" -c "import gradio, pandas, requests, bs4, scrapy, selenium, pdfplumber, PyPDF2, cv2, pytesseract, plotly, openpyxl" >nul 2>&1
+".venv\Scripts\python.exe" -c "%PACKAGES_OK%" >nul 2>&1
 if errorlevel 1 goto pip_failed
 echo.
 echo [OK] All the Python packages are installed.
@@ -199,7 +204,7 @@ rem ======================================================================
 rem  HELPERS
 rem ======================================================================
 
-rem ---- Looks for a Python that is 3.10 or newer, puts it in PY ----------
+rem ---- Looks for a Python that is 3.11 or newer, puts it in PY ----------
 :find_python
 set "PY="
 call :try_python py -3.12
@@ -216,7 +221,7 @@ exit /b 0
 :try_python
 rem  Plain "python" can be a Microsoft Store shortcut that does nothing,
 rem  so every one is tested by actually running it.
-%* -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" >nul 2>&1
+%* -c "import sys; sys.exit(0 if sys.version_info >= (3, 11) else 1)" >nul 2>&1
 if not errorlevel 1 set "PY=%*"
 exit /b 0
 

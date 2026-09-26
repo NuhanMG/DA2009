@@ -237,6 +237,17 @@ Rebuild them all with `python build_guides.py`, or one member's document with
 `docs/slides.pptx` is the short presentation. Each slide has a speaker script
 in its notes - about 3 minutes in total.
 
+Two speaker-note PDFs go with it:
+
+| File | What it is |
+|---|---|
+| `docs/Speaker_Notes_Slides.pdf` | What to say on each slide, who says it, how long it takes, what to point at, and short answers to likely questions. |
+| `docs/Speaker_Notes_Live_Demo.pdf` | **Plan B** - presenting the app live instead of the slides: getting ready, a 3 minute route through the tabs with the exact buttons to press and what to say, extras to show for each member during the questions, and what to do if something goes wrong. |
+
+Rebuild just these two with `python build_guides.py notes`. The spoken words
+for the slides live in `guide_content/slide_script.py`, which feeds both the
+slide notes and the PDF.
+
 ---
 
 ## Source

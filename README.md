@@ -42,7 +42,7 @@ web browser.
    **`<> Code`**. Click it.
 3. A small box opens. Click **Download ZIP** at the bottom of the box.
 4. Your browser downloads a file called
-   **`DA2009-CSE-Data-Collection-main.zip`** into your **Downloads** folder.
+   **`DA2009-main.zip`** into your **Downloads** folder.
 
 > 📦 A **ZIP file** is like a box with all the project's files packed
 > inside. We have to unpack it before we can use it. That is Step 2.
@@ -58,7 +58,7 @@ every time you open one of the project's files.
 1. Open your **Downloads** folder:
    press the **Windows key** and the **E** key together. A File Explorer
    window opens. Click **Downloads** on the left side.
-2. **Right-click** the file `DA2009-CSE-Data-Collection-main.zip` and click
+2. **Right-click** the file `DA2009-main.zip` and click
    **Properties** (near the bottom of the list).
 3. Look at the bottom of the window that opens. If you see the word
    **Unblock** with a small box next to it, **tick the box**. Then click
@@ -67,7 +67,7 @@ every time you open one of the project's files.
 4. **Right-click** the ZIP file again and click **Extract All...**
 5. A window opens. Do not change anything. Just click **Extract**.
 6. A new folder opens. Inside it there is **another folder with the same
-   name**, `DA2009-CSE-Data-Collection-main`. **Double-click it** to go
+   name**, `DA2009-main`. **Double-click it** to go
    inside.
 7. You are in the right place when you can see files called
    **`1_SETUP_First_Time_Only`**, **`2_START_The_App`** and so on.
@@ -190,6 +190,9 @@ Double-click them the same way.
    press **Shift + Enter** to run it. Keep going, one box at a time.
 5. For the full technical explanation, read
    **[HOW_IT_WORKS.md](HOW_IT_WORKS.md)**.
+6. For the viva presentation: `docs\Speaker_Notes_Slides.pdf` goes with the
+   slides (`docs\slides.pptx`). `docs\Speaker_Notes_Live_Demo.pdf` is
+   **Plan B** - presenting the app live instead of the slides.
 
 ### 👥 Who wrote what
 
@@ -248,7 +251,7 @@ Delete the project folder. Python and Tesseract can be removed in
 | `1_...` to `6_...` | The files you double-click |
 | `app.py` | The app itself |
 | `src` | Each member's code — one file for each job |
-| `docs` | The team guide, each member's document, the slides, the ethics statement and viva notes |
+| `docs` | The team guide, each member's document, the slides and their speaker notes, the live demo notes (Plan B), the ethics statement and viva notes |
 | `notebooks` | The step-by-step walkthrough notebook |
 | `scrapy_project` | The Scrapy spider |
 | `config.py` | All the settings, in one place |

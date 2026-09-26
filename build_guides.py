@@ -4,10 +4,13 @@ Builds the study guides and the member documents:
     docs/CSE_Team_Guide.pdf          shared with all four members
     docs/CSE_24ada076_Deep_Guide.pdf the detailed one
     docs/member_documents/           one document for each member
+    docs/Speaker_Notes_Slides.pdf    what to say with docs/slides.pptx
+    docs/Speaker_Notes_Live_Demo.pdf Plan B - presenting the app live
 
 Helper script, not part of the scraping project itself.
 Run:  python build_guides.py            (everything)
       python build_guides.py sasini     (just one member's document)
+      python build_guides.py notes      (just the two speaker notes)
 """
 
 import importlib
@@ -17,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 import config
-from guide_content import common, deep
+from guide_content import common, deep, speaker_notes
 from guide_content import pdf_engine as E
 from guide_content.q_072 import Q_072
 from guide_content.q_073 import Q_073
@@ -294,12 +297,32 @@ def member_document(member):
 
 
 #=========================================================================#
+#  THE SPEAKER NOTES                                                      #
+#=========================================================================#
+
+def speaker_note_files():
+    slides = OUT / "Speaker_Notes_Slides.pdf"
+    E.build(slides, FOOTER + " - speaker notes, slides",
+            speaker_notes.slides_notes(), toc_depth=1)
+
+    demo = OUT / "Speaker_Notes_Live_Demo.pdf"
+    E.build(demo, FOOTER + " - speaker notes, live demo",
+            speaker_notes.demo_notes(), toc_depth=1)
+    return slides, demo
+
+
+#=========================================================================#
 
 def show(path):
     print(f"  {path.name:34} {path.stat().st_size / 1024:,.0f} KB")
 
 
 def main(only=None):
+    if only and only.lower() == "notes":
+        for path in speaker_note_files():
+            show(path)
+        return
+
     # Just one member's document, chosen by name or index number.
     if only:
         for member, name in config.NAMES.items():
@@ -319,6 +342,9 @@ def main(only=None):
 
     for member in MEMBER_DOCUMENTS:
         show(member_document(member))
+
+    for path in speaker_note_files():
+        show(path)
 
 
 if __name__ == "__main__":

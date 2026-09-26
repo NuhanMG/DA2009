@@ -5,7 +5,9 @@
 requests>=2.32           # sending requests to the website
 beautifulsoup4>=4.13     # reading HTML
 lxml>=5.0                # helps BeautifulSoup read XML files
-pandas>=2.2              # DataFrames, cleaning and saving
+pandas>=3.0              # DataFrames, cleaning and saving. Must be 3 or
+                         # newer: cleaner.py uses its "str" text type.
+                         # pandas 3 needs Python 3.11 or newer.
 numpy>=2.1               # needed by pandas
 
 #--- Browser and crawling ------------------------------------------------#

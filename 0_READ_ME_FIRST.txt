@@ -6,7 +6,7 @@
   25ada073 - Sasini   25ada141 - Salaama
 
 The full guide, with more help, is on the project's GitHub page:
-  https://github.com/NuhanMG/DA2009-CSE-Data-Collection
+  https://github.com/NuhanMG/DA2009
 
 You need: a Windows 10 or 11 computer, internet, and about 2 GB of
 free space.
@@ -17,7 +17,7 @@ free space.
 ------------------------------------------------------------------
 If you are reading this from inside a ZIP file, stop here first:
   1. Go to your Downloads folder.
-  2. Right-click  DA2009-CSE-Data-Collection-main.zip
+  2. Right-click  DA2009-main.zip
      and click  Extract All...  then click  Extract.
   3. Open the new folder, and then the folder inside it with the
      same name. Open this file again from there.
